@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body,ul{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				background-color: black;
+			}
+			li{
+				list-style: none;
+			}
+			img{
+				border: none;
+				vertical-align: top;
+			}
+			.clearfix:after{
+				content: "";
+				clear: both;
+				display: block;
+			}
+			#wrap{
+				width:800px;
+				background-color: rgba(255,255,255,.5);
+				border-radius: 5px;
+				/*border: 1px solid black;*/
+				padding: 8px;
+				margin: 50px auto;
+			}
+			#wrap li{
+				width:400px;
+				height:100px;
+				overflow: hidden;
+				float: left;
+				position: relative;
+			}
+			#wrap img{
+				width:400px;
+				height:100px;
+			}
+			#wrap div{
+				position: absolute;
+				left: 0;
+				top:0;
+			}
+		</style>
+	</head>
+	<body>
+		<ul id="wrap" class="clearfix">
+			<!--<li>
+				<div>
+					<img src="img/1.jpg" />
+					<img src="img/1.jpg" />
+					<img src="img/1.jpg" />
+				</div>
+			</li>
+			<li>
+				<div>
+					<img src="img/1.jpg" />
+					<img src="img/1.jpg" />
+					<img src="img/1.jpg" />
+				</div>
+			</li>
+			<li>
+				<div>
+					<img src="img/1.jpg" />
+					<img src="img/1.jpg" />
+					<img src="img/1.jpg" />
+				</div>
+			</li>
+			<li>
+				<div>
+					<img src="img/1.jpg" />
+					<img src="img/1.jpg" />
+					<img src="img/1.jpg" />
+				</div>
+			</li>
+			<li>
+				<div>
+					<img src="img/1.jpg" />
+					<img src="img/1.jpg" />
+					<img src="img/1.jpg" />
+				</div>
+			</li>
+			<li>
+				<div>
+					<img src="img/1.jpg" />
+					<img src="img/1.jpg" />
+					<img src="img/1.jpg" />
+				</div>
+			</li>
+			<li>
+				<div>
+					<img src="img/1.jpg" />
+					<img src="img/1.jpg" />
+					<img src="img/1.jpg" />
+				</div>
+			</li>
+			<li>
+				<div>
+					<img src="img/1.jpg" />
+					<img src="img/1.jpg" />
+					<img src="img/1.jpg" />
+				</div>
+			</li>-->
+		</ul>
+		
+		<!--运动函数引入-->
+		<script src="move.js"></script>
+		
+		<script>
+			//图片地址数据
+			var arr=[
+				["img/1.jpg","img/1-1.jpg","img/1-2.jpg"],
+				["img/2.jpg","img/2-1.jpg","img/2-2.jpg"],
+				["img/3.jpg","img/3-1.jpg","img/3-2.jpg"],
+				["img/4.jpg","img/4-1.jpg","img/4-2.jpg"],
+				["img/4.jpg","img/4-1.jpg","img/4-2.jpg"],
+				["img/3.jpg","img/3-1.jpg","img/3-2.jpg"],
+				["img/2.jpg","img/2-1.jpg","img/2-2.jpg"],
+				["img/1.jpg","img/1-1.jpg","img/1-2.jpg"]
+			];
+			
+			//数组排序顺序     [0 1 2 3 4 5 6 7]
+			var arrNum=[];
+			for(var i=0;i<arr.length;i++){
+				arrNum.push(i);
+			}
+			
+			//图片运动位置数据
+			var topsArr=["0","-100","-200"];
+			
+			//生成布局
+			var wrap=document.getElementById("wrap");
+			var str="";
+			for(var i=0;i<arr.length;i++){
+				str+="<li><div><img src="+arr[i][0]+" /><img src="+arr[i][1]+" /><img src="+arr[i][2]+" /></div></li>";
+				wrap.innerHTML=str;
+			}
+			
+			//运动
+			var timer=null;
+			var divs=wrap.getElementsByTagName("div");
+			
+			timer=setInterval(function(){
+				//随机打乱数字
+				arrNum.sort(function(){
+					return Math.random()-0.5
+				})
+				topsArr.sort(function(){
+					return Math.random()-0.5
+				})
+				//裁切前4个数
+				var arrNum_1=arrNum.slice(0,4);
+				
+				for(var i=0;i<arrNum_1.length;i++){
+					var obj = divs[arrNum_1[i]];
+					move(obj,{"top":topsArr[0]},500,"linear",function(){});
+				}
+			},1000)
+			
+		</script>
+	</body>
+</html>
